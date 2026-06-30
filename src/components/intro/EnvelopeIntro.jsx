@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
 import { useMusic } from '../../context/MusicContext'
 import {
@@ -55,6 +55,7 @@ function SealWithGlow() {
 
 export default function EnvelopeIntro({ onFlapMoveComplete }) {
   const [phase, setPhase] = useState(/** @type {IntroPhase} */ ('closed'))
+  const openingRef = useRef(false)
   const { attemptPlay } = useMusic()
 
   useEffect(() => {
@@ -64,9 +65,12 @@ export default function EnvelopeIntro({ onFlapMoveComplete }) {
     })
   }, [])
 
-  const handleIntroPress = () => {
+  const handleIntroActivate = () => {
+    // Must run synchronously, before any state updates, so the browser still
+    // associates audio.play() with this tap's "user gesture".
     attemptPlay()
-    if (phase !== 'closed') return
+    if (phase !== 'closed' || openingRef.current) return
+    openingRef.current = true
     setPhase('opening')
   }
 
@@ -80,12 +84,20 @@ export default function EnvelopeIntro({ onFlapMoveComplete }) {
   const isOpenPhase = phase === 'opening' || phase === 'opened'
 
   return (
-    <button
-      type="button"
+    <div
+      role="button"
+      tabIndex={phase === 'closed' ? 0 : -1}
       aria-label="افتح الدعوة"
-      disabled={phase !== 'closed'}
-      className="envelope-intro relative block h-[100svh] w-full overflow-hidden border-0 bg-[#F7EDEA] p-0 outline-none disabled:cursor-default"
-      onPointerDown={handleIntroPress}
+      className="envelope-intro relative block h-[100svh] w-full cursor-pointer touch-manipulation overflow-hidden bg-[#F7EDEA] outline-none"
+      onTouchStart={phase === 'closed' ? handleIntroActivate : undefined}
+      onClick={phase === 'closed' ? handleIntroActivate : undefined}
+      onKeyDown={(event) => {
+        if (phase !== 'closed') return
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault()
+          handleIntroActivate()
+        }
+      }}
     >
       <img
         src={isOpenPhase ? INTRO_ASSETS.openedBase : INTRO_ASSETS.closedBg}
@@ -147,6 +159,6 @@ export default function EnvelopeIntro({ onFlapMoveComplete }) {
           {INTRO_COPY.hint}
         </motion.p>
       )}
-    </button>
+    </div>
   )
 }

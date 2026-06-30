@@ -55,7 +55,7 @@ export default function IntroScreen() {
             <ClosingSection />
           </main>
 
-          <div className="fixed inset-x-0 top-3 z-40 flex items-center justify-center gap-2">
+          <div className="fixed inset-x-0 top-3 z-[60] flex items-center justify-center gap-2">
             <MusicToggle />
             <LanguageToggle />
           </div>
