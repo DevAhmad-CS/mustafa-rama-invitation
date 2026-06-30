@@ -13,7 +13,9 @@ export function LanguageProvider({ children }) {
   useEffect(() => {
     document.documentElement.lang = lang
     document.documentElement.dir = t.dir
-  }, [lang, t.dir])
+    document.title =
+      lang === 'ar' ? `دعوة زفاف ${t.hero.groom} و ${t.hero.bride}` : `${t.hero.groom} & ${t.hero.bride} Wedding Invitation`
+  }, [lang, t])
 
   const value = useMemo(() => ({ lang, dir: t.dir, toggleLang, t }), [lang, t])
 
