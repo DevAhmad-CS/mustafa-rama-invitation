@@ -17,7 +17,10 @@ function trySeek(audio) {
 
 export function MusicProvider({ children }) {
   const audioRef = useRef(null)
-  const mutedRef = useRef(false)
+  // Only true once the guest *deliberately* presses the mute button.
+  // A blocked autoplay attempt must NEVER set this — otherwise it permanently
+  // blocks every future tap from retrying, which looked like "it mutes itself".
+  const userMutedRef = useRef(false)
   const startedRef = useRef(false)
   const [muted, setMuted] = useState(false)
   const [isPlaying, setIsPlaying] = useState(false)
@@ -44,11 +47,14 @@ export function MusicProvider({ children }) {
   /**
    * Must be called synchronously, directly inside a tap/click/key handler —
    * NEVER after an `await` — otherwise mobile browsers drop the "user
-   * gesture" association and silently block playback.
+   * gesture" association and silently block playback. Safe to call on every
+   * tap: if a previous attempt was blocked, this simply retries.
    */
   const attemptPlay = useCallback(() => {
     const audio = audioRef.current
-    if (!audio || mutedRef.current) return
+    if (!audio || userMutedRef.current) return
+
+    audio.muted = false
 
     if (!startedRef.current) {
       startedRef.current = true
@@ -56,21 +62,16 @@ export function MusicProvider({ children }) {
       audio.addEventListener('loadedmetadata', () => trySeek(audio), { once: true })
     }
 
-    const playPromise = audio.play()
-    playPromise?.catch(() => {
-      // Audible playback was blocked — fall back to a muted stream so timing
-      // stays correct, and flip the UI to "muted" so the toggle invites a tap.
-      audio.muted = true
-      audio.play().catch(() => {})
-      mutedRef.current = true
-      setMuted(true)
+    audio.play().catch(() => {
+      // Blocked by the browser this time — leave everything as-is (still
+      // "unmuted" intent) so the very next tap anywhere can simply retry.
     })
   }, [])
 
   const toggleMute = useCallback(() => {
     setMuted((prev) => {
       const next = !prev
-      mutedRef.current = next
+      userMutedRef.current = next
       const audio = audioRef.current
       if (!audio) return next
 

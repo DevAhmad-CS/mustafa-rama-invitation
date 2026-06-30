@@ -89,7 +89,6 @@ export default function EnvelopeIntro({ onFlapMoveComplete }) {
       tabIndex={phase === 'closed' ? 0 : -1}
       aria-label="افتح الدعوة"
       className="envelope-intro relative block h-[100svh] w-full cursor-pointer touch-manipulation overflow-hidden bg-[#F7EDEA] outline-none"
-      onTouchStart={phase === 'closed' ? handleIntroActivate : undefined}
       onClick={phase === 'closed' ? handleIntroActivate : undefined}
       onKeyDown={(event) => {
         if (phase !== 'closed') return
