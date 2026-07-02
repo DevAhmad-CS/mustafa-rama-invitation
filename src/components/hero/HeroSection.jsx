@@ -129,7 +129,7 @@ export default function HeroSection({ revealed = false }) {
 
       {/* Scroll hint — fixed near bottom, styled to catch the eye */}
       <motion.div
-        className="hero-scroll-hint absolute inset-x-0 bottom-14 z-[5] flex flex-col items-center gap-1.5"
+        className="hero-scroll-hint absolute inset-x-0 bottom-12 z-[5] flex flex-col items-center gap-1.5"
         initial={{ opacity: 0, y: 4 }}
         animate={revealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 4 }}
         transition={contentTransition(HERO_STAGGER.scrollHint)}
