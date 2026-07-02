@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
-import { Check, CheckCircle2, Heart, X } from 'lucide-react'
+import { Check, CheckCircle2, Heart } from 'lucide-react'
 import { useT } from '../../context/LanguageContext'
 import CelebrationBurst from '../effects/CelebrationBurst'
 import FloatingMotif from '../effects/FloatingMotif'
@@ -21,7 +21,6 @@ export default function GuestFormSection() {
   const { rsvp, hero } = useT()
   const [submitted, setSubmitted] = useState(false)
   const [sending, setSending] = useState(false)
-  const [attending, setAttending] = useState('yes')
   const [name, setName] = useState('')
   const [guests, setGuests] = useState(1)
   const [notes, setNotes] = useState('')
@@ -31,7 +30,6 @@ export default function GuestFormSection() {
     if (sending) return
 
     const guestName = name.trim()
-    const attendingLabel = attending === 'yes' ? rsvp.attendingYes : rsvp.attendingNo
 
     setSending(true)
     try {
@@ -39,7 +37,6 @@ export default function GuestFormSection() {
       formData.append('access_key', FORM_KEY)
       formData.set('subject', `تأكيد حضور جديد من ${guestName} — دعوة زفاف ${hero.groom} و ${hero.bride}`)
       formData.set('from_name', `موقع دعوة زفاف ${hero.groom} و ${hero.bride}`)
-      formData.set(rsvp.fieldLabels.attending, attendingLabel)
       formData.set(rsvp.fieldLabels.notes, notes.trim() || '—')
 
       const response = await globalThis.fetch(POST_URL, { method: 'POST', body: formData })
@@ -143,36 +140,6 @@ export default function GuestFormSection() {
                       className="rsvp-input rounded-full px-4 py-2.5 font-body text-[0.875rem] text-burgundy outline-none transition-shadow duration-300 focus:shadow-[0_0_0_3px_rgba(212,175,55,0.2)]"
                     />
                   </label>
-
-                  <div className="flex flex-col gap-1.5">
-                    <span className="font-body text-[0.8125rem] font-medium text-burgundy">{rsvp.attending}</span>
-                    <div className="flex gap-3">
-                      <motion.button
-                        type="button"
-                        onClick={() => setAttending('yes')}
-                        className={`rsvp-toggle flex flex-1 items-center justify-center gap-1.5 rounded-full px-4 py-2.5 font-body text-[0.8125rem] font-medium transition-all duration-300 ${
-                          attending === 'yes' ? 'rsvp-toggle--active' : ''
-                        }`}
-                        whileTap={{ scale: 0.97 }}
-                        transition={TAP_TRANSITION}
-                      >
-                        <Check size={14} strokeWidth={2.5} />
-                        {rsvp.attendingYes}
-                      </motion.button>
-                      <motion.button
-                        type="button"
-                        onClick={() => setAttending('no')}
-                        className={`rsvp-toggle flex flex-1 items-center justify-center gap-1.5 rounded-full px-4 py-2.5 font-body text-[0.8125rem] font-medium transition-all duration-300 ${
-                          attending === 'no' ? 'rsvp-toggle--active' : ''
-                        }`}
-                        whileTap={{ scale: 0.97 }}
-                        transition={TAP_TRANSITION}
-                      >
-                        <X size={14} strokeWidth={2.5} />
-                        {rsvp.attendingNo}
-                      </motion.button>
-                    </div>
-                  </div>
 
                   <label className="flex flex-col gap-1.5">
                     <span className="font-body text-[0.8125rem] font-medium text-burgundy">{rsvp.notes}</span>

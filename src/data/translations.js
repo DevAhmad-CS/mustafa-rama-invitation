@@ -14,8 +14,6 @@ export const TRANSLATIONS = {
       line1: 'بكل حب وفرح',
       line2: 'نتشرف بدعوتكم لمشاركتنا يوم زفافنا',
       date: 'الجمعة، 10 يوليو 2026',
-      primaryCta: 'تأكيد الحضور',
-      secondaryCta: 'إضافة إلى التقويم',
       scrollHint: 'مرر للأسفل لمعرفة التفاصيل',
     },
 
@@ -27,6 +25,7 @@ export const TRANSLATIONS = {
 
     eventDetails: {
       title: 'تفاصيل الاحتفال',
+      addToCalendar: 'إضافة إلى التقويم',
       cards: [
         {
           id: 'wedding',
@@ -38,7 +37,7 @@ export const TRANSLATIONS = {
           id: 'lunch',
           icon: 'calendar',
           title: 'غداء الزفاف',
-          lines: ['الخميس 9/7/2026', 'الساعة 1:00 ظهراً', 'منطقة سحاب - الفيصلية'],
+          lines: ['الخميس 9/7/2026', 'الساعة 3:00 عصراً', 'جمعية سلواد'],
         },
       ],
     },
@@ -64,7 +63,7 @@ export const TRANSLATIONS = {
         {
           id: 'lunch-location',
           title: 'موقع غداء الزفاف',
-          subtitle: 'منطقة سحاب - الفيصلية',
+          subtitle: 'جمعية سلواد',
           href: LOCATION_HREFS.lunch,
         },
       ],
@@ -75,21 +74,18 @@ export const TRANSLATIONS = {
       name: 'الاسم',
       namePlaceholder: 'اكتب اسمك الكامل',
       guests: 'عدد الحضور',
-      attending: 'هل ستحضر؟',
-      attendingYes: 'نعم',
-      attendingNo: 'لا',
       notes: 'ملاحظات اختيارية',
       notesPlaceholder: 'أي ملاحظات تودون إضافتها...',
       submit: 'تأكيد الحضور',
       sending: 'جارٍ الإرسال...',
       success: 'شكراً لك {name}، يسعد {groom} و {bride} حضورك ومشاركتك فرحة هذا اليوم المميز',
-      fieldLabels: { name: 'الاسم', guests: 'عدد الحضور', attending: 'الحضور', notes: 'ملاحظات' },
+      fieldLabels: { name: 'الاسم', guests: 'عدد الحضور', notes: 'ملاحظات' },
     },
 
     closing: {
       line1: 'حضوركم شرف لنا وسرور لا يُنسى',
       line2: 'ونعتز بمشاركتكم فرحتنا',
-      signature: 'مصطفى محمود موسى جرادات',
+      signature: 'مصطفى محمد محمود موسى جرادات',
     },
   },
 
@@ -106,8 +102,6 @@ export const TRANSLATIONS = {
       line1: 'With love and joy',
       line2: 'We would be honored to have you celebrate our wedding day with us',
       date: 'Friday, July 10, 2026',
-      primaryCta: 'Confirm Attendance',
-      secondaryCta: 'Add to Calendar',
       scrollHint: 'Scroll down for details',
     },
 
@@ -119,6 +113,7 @@ export const TRANSLATIONS = {
 
     eventDetails: {
       title: 'Celebration Details',
+      addToCalendar: 'Add to Calendar',
       cards: [
         {
           id: 'wedding',
@@ -130,7 +125,7 @@ export const TRANSLATIONS = {
           id: 'lunch',
           icon: 'calendar',
           title: 'Wedding Lunch',
-          lines: ['Thursday 9/7/2026', '1:00 PM', 'Sahab Area - Al-Faisaliyah'],
+          lines: ['Thursday 9/7/2026', '3:00 PM', 'Silwad Association'],
         },
       ],
     },
@@ -156,7 +151,7 @@ export const TRANSLATIONS = {
         {
           id: 'lunch-location',
           title: 'Wedding Lunch Location',
-          subtitle: 'Sahab Area - Al-Faisaliyah',
+          subtitle: 'Silwad Association',
           href: LOCATION_HREFS.lunch,
         },
       ],
@@ -167,21 +162,18 @@ export const TRANSLATIONS = {
       name: 'Name',
       namePlaceholder: 'Enter your full name',
       guests: 'Number of Guests',
-      attending: 'Will you attend?',
-      attendingYes: 'Yes',
-      attendingNo: 'No',
       notes: 'Notes (optional)',
       notesPlaceholder: 'Any notes you would like to add...',
       submit: 'Confirm Attendance',
       sending: 'Sending...',
       success: 'Thank you, {name} — {groom} and {bride} are delighted to have you share in their special day',
-      fieldLabels: { name: 'Name', guests: 'Number of Guests', attending: 'Attending', notes: 'Notes' },
+      fieldLabels: { name: 'Name', guests: 'Number of Guests', notes: 'Notes' },
     },
 
     closing: {
       line1: 'Your presence is an honor and an unforgettable joy to us',
       line2: 'and we cherish you sharing in our happiness',
-      signature: 'Mustafa Mahmoud Mousa Jaradat',
+      signature: 'Mustafa Mohammad Mahmoud Mousa Jaradat',
     },
   },
 }

@@ -6,6 +6,7 @@ import { MusicProvider } from '../../context/MusicContext'
 import { ENVELOPE_FADE_TRANSITION } from '../../data/siteContent'
 import LanguageToggle from '../common/LanguageToggle'
 import MusicToggle from '../common/MusicToggle'
+import ScrollProgressBar from '../effects/ScrollProgressBar'
 import HeroSection from '../hero/HeroSection'
 import MobileOnlyScreen from '../MobileOnlyScreen'
 import ClosingSection from '../sections/ClosingSection'
@@ -44,6 +45,7 @@ export default function IntroScreen() {
   return (
     <LanguageProvider>
       <MusicProvider>
+        <ScrollProgressBar />
         <div className={`relative mx-auto w-full max-w-[430px] ${introHidden ? 'overflow-x-hidden' : 'overflow-hidden'}`}>
           <main className="relative">
             <HeroSection revealed={heroRevealed} />

@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
 import { useMusic } from '../../context/MusicContext'
+import ShimmerText from '../common/ShimmerText'
 import {
   FLAP_LIFT_PX,
   FLAP_MOVE_TRANSITION,
@@ -138,25 +139,36 @@ export default function EnvelopeIntro({ onFlapMoveComplete }) {
             />
           </div>
 
-          <p
-            className="pointer-events-none absolute inset-x-0 z-10 text-center font-body text-[0.6875rem] font-light tracking-wide text-[rgba(43,27,47,0.35)]"
-            style={{ top: `calc(${SEAL_TOP} + 58px)` }}
+          <div
+            className="pointer-events-none absolute inset-x-0 z-10 text-center"
+            style={{ top: `calc(${SEAL_TOP} + 104px)` }}
           >
-            {INTRO_COPY.hint}
-          </p>
+            <motion.div
+              className="relative inline-block"
+              animate={{ scale: [1, 1.06, 1] }}
+              transition={{ duration: 2.4, repeat: Infinity, repeatDelay: 1, ease: 'easeInOut' }}
+            >
+              <span className="tap-ripple tap-ripple--intro" aria-hidden="true" />
+              <ShimmerText as="p" className="shimmer-text--intro relative font-body text-[1.25rem] font-bold tracking-wide">
+                {INTRO_COPY.hint}
+              </ShimmerText>
+            </motion.div>
+          </div>
         </>
       )}
 
       {phase === 'opening' && (
-        <motion.p
-          className="pointer-events-none absolute inset-x-0 z-10 text-center font-body text-[0.6875rem] font-light tracking-wide text-[rgba(43,27,47,0.35)]"
-          style={{ top: `calc(${SEAL_TOP} + 58px)` }}
+        <motion.div
+          className="pointer-events-none absolute inset-x-0 z-10 text-center"
+          style={{ top: `calc(${SEAL_TOP} + 104px)` }}
           initial={{ opacity: 1 }}
           animate={{ opacity: 0 }}
           transition={{ duration: 0.35, ease: GLOW_TRANSITION.ease }}
         >
-          {INTRO_COPY.hint}
-        </motion.p>
+          <ShimmerText as="p" className="font-body text-[1.25rem] font-bold tracking-wide">
+            {INTRO_COPY.hint}
+          </ShimmerText>
+        </motion.div>
       )}
     </div>
   )

@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { CalendarPlus, CheckCircle2, ChevronDown } from 'lucide-react'
+import { ChevronDown } from 'lucide-react'
 import { useT } from '../../context/LanguageContext'
 import { HERO_INITIAL, HERO_REVEALED, HERO_STAGGER, contentTransition } from '../../data/siteContent'
 import CrestMedallion from '../common/CrestMedallion'
@@ -12,14 +12,12 @@ import RevealBurst from '../effects/RevealBurst'
 import ParticleField from '../effects/ParticleField'
 import FloatingPetals from '../effects/FloatingPetals'
 
-const BUTTON_TRANSITION = { duration: 0.18, ease: [0.22, 1, 0.36, 1] }
-
 export default function HeroSection({ revealed = false }) {
   const { hero } = useT()
 
   return (
     <section
-      className="hero-section relative flex min-h-[100svh] w-full flex-col overflow-hidden text-center"
+      className="hero-section relative flex min-h-[88svh] w-full flex-col overflow-hidden text-center"
       aria-hidden={!revealed}
     >
       {/* Background layers */}
@@ -53,7 +51,7 @@ export default function HeroSection({ revealed = false }) {
       </div>
 
       {/* Main content — vertically centered, no boxed arch so it can breathe wider */}
-      <div className="relative z-[5] flex flex-1 flex-col items-center justify-center px-5 pb-24 pt-14">
+      <div className="relative z-[5] flex flex-1 flex-col items-center justify-center px-5 pb-12 pt-10">
         <motion.div
           className="hero-panel relative w-full max-w-[23rem]"
           initial={HERO_INITIAL}
@@ -63,7 +61,7 @@ export default function HeroSection({ revealed = false }) {
           <FrameCorners animate={revealed} />
           <div className="hero-panel-glow pointer-events-none absolute inset-0" aria-hidden="true" />
 
-          <div className="hero-panel-content relative flex flex-col items-center px-6 py-10">
+          <div className="hero-panel-content relative flex flex-col items-center px-6 py-8">
             <motion.div
               initial={{ opacity: 0, y: 6 }}
               animate={revealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 6 }}
@@ -127,62 +125,32 @@ export default function HeroSection({ revealed = false }) {
             </motion.div>
           </div>
         </motion.div>
-
-        {/* Buttons — below the panel, not overlapping it */}
-        <motion.div
-          className="hero-actions mt-7 flex w-full flex-col items-center gap-3.5"
-          initial={{ opacity: 0, y: 10 }}
-          animate={revealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
-          transition={contentTransition(HERO_STAGGER.buttons)}
-        >
-          <motion.a
-            href="#rsvp"
-            className="hero-btn-primary btn-ornate relative inline-flex w-[84%] max-w-[18.5rem] items-center justify-center gap-2 overflow-hidden rounded-full font-body text-[0.875rem] font-medium text-ivory"
-            style={{ height: '56px' }}
-            whileTap={{ scale: 0.98 }}
-            whileHover={{ scale: 1.015 }}
-            transition={BUTTON_TRANSITION}
-          >
-            <span className="hero-btn-shine" aria-hidden="true" />
-            <span className="btn-ornate__gem btn-ornate__gem--start" aria-hidden="true" />
-            <CheckCircle2 size={18} strokeWidth={2} className="relative z-[1]" />
-            <span className="relative z-[1]">{hero.primaryCta}</span>
-            <span className="btn-ornate__gem btn-ornate__gem--end" aria-hidden="true" />
-          </motion.a>
-          <motion.button
-            type="button"
-            className="hero-btn-secondary btn-ornate btn-ornate--soft relative inline-flex w-[84%] max-w-[18.5rem] items-center justify-center gap-2 rounded-full font-body text-[0.8125rem] font-medium text-burgundy"
-            style={{ height: '52px' }}
-            whileTap={{ scale: 0.98 }}
-            whileHover={{ scale: 1.015 }}
-            transition={BUTTON_TRANSITION}
-          >
-            <span className="btn-ornate__gem btn-ornate__gem--start" aria-hidden="true" />
-            <CalendarPlus size={16} strokeWidth={2} className="text-gold-soft" />
-            {hero.secondaryCta}
-            <span className="btn-ornate__gem btn-ornate__gem--end" aria-hidden="true" />
-          </motion.button>
-        </motion.div>
       </div>
 
-      {/* Scroll hint — fixed near bottom */}
+      {/* Scroll hint — fixed near bottom, styled to catch the eye */}
       <motion.div
-        className="hero-scroll-hint absolute inset-x-0 bottom-7 z-[5] flex flex-col items-center gap-1"
+        className="hero-scroll-hint absolute inset-x-0 bottom-14 z-[5] flex flex-col items-center gap-1.5"
         initial={{ opacity: 0, y: 4 }}
         animate={revealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 4 }}
         transition={contentTransition(HERO_STAGGER.scrollHint)}
       >
-        <p className="font-body text-[0.6875rem] font-light tracking-[0.06em] text-[#5B2A35]/72">
-          {hero.scrollHint}
-        </p>
-        <motion.span
-          className="flex text-gold/70"
-          animate={revealed ? { y: [0, 5, 0] } : {}}
-          transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut' }}
-          aria-hidden="true"
+        <motion.div
+          className="hero-scroll-badge flex items-center gap-1.5 rounded-full px-3.5 py-1.5"
+          animate={revealed ? { boxShadow: ['0 0 0px rgba(212,175,55,0)', '0 0 14px rgba(212,175,55,0.55)', '0 0 0px rgba(212,175,55,0)'] } : {}}
+          transition={{ duration: 2.6, repeat: Infinity, ease: 'easeInOut' }}
         >
-          <ChevronDown size={16} strokeWidth={1.75} />
-        </motion.span>
+          <p className="font-body text-[0.75rem] font-medium tracking-[0.04em] text-[#8a6a1f]">
+            {hero.scrollHint}
+          </p>
+          <motion.span
+            className="flex text-gold"
+            animate={revealed ? { y: [0, 6, 0] } : {}}
+            transition={{ duration: 1.6, repeat: Infinity, ease: 'easeInOut' }}
+            aria-hidden="true"
+          >
+            <ChevronDown size={18} strokeWidth={2.2} />
+          </motion.span>
+        </motion.div>
       </motion.div>
     </section>
   )

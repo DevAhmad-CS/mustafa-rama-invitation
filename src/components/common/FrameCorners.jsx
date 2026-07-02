@@ -5,10 +5,10 @@ const CORNER_ACCENT = 'M2 21 L2 12 C2 8.4 4.4 6 8 5.2'
 
 function Corner({ position }) {
   const placement = {
-    'top-left': 'absolute -left-1 -top-1 h-9 w-9',
-    'top-right': 'absolute -right-1 -top-1 h-9 w-9 -scale-x-100',
-    'bottom-left': 'absolute -bottom-1 -left-1 h-9 w-9 -scale-y-100',
-    'bottom-right': 'absolute -bottom-1 -right-1 h-9 w-9 -scale-x-100 -scale-y-100',
+    'top-left': 'absolute -left-1 top-1 h-9 w-9',
+    'top-right': 'absolute -right-1 top-1 h-9 w-9 -scale-x-100',
+    'bottom-left': 'absolute bottom-2.5 -left-1 h-9 w-9 -scale-y-100',
+    'bottom-right': 'absolute bottom-2.5 -right-1 h-9 w-9 -scale-x-100 -scale-y-100',
   }[position]
 
   return (

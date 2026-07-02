@@ -59,10 +59,20 @@ export const LANTERN_ASSET = '/assets/intro/lanterns/lantern-gold.png'
 /* ------------------------------------------------------------------ */
 
 export const WEDDING_TARGET = '2026-07-10T17:30:00+03:00'
-export const LUNCH_TARGET = '2026-07-09T13:00:00+03:00'
+export const LUNCH_TARGET = '2026-07-09T15:00:00+03:00'
+
+/** End times — used for "Add to Calendar" event blocks (estimated durations) */
+export const WEDDING_END = '2026-07-10T20:30:00+03:00'
+export const LUNCH_END = '2026-07-09T17:00:00+03:00'
 
 /** Kept for backward compatibility with the main countdown */
 export const COUNTDOWN_TARGET = WEDDING_TARGET
+
+/** Maps each event-details card id to its calendar start/end window */
+export const EVENT_TIMES = {
+  wedding: { start: WEDDING_TARGET, end: WEDDING_END },
+  lunch: { start: LUNCH_TARGET, end: LUNCH_END },
+}
 
 /* ------------------------------------------------------------------ */
 /* Location links — real links provided once, shared by both languages */
@@ -70,5 +80,5 @@ export const COUNTDOWN_TARGET = WEDDING_TARGET
 
 export const LOCATION_HREFS = {
   wedding: 'https://maps.app.goo.gl/5sEzHKRoNRvzos6B9?g_st=iw',
-  lunch: 'https://maps.app.goo.gl/hQYcEUPYzSWAuuo37?g_st=iw',
+  lunch: 'https://maps.app.goo.gl/3pHyDEoMfLFQuUxP9?g_st=iw',
 }
